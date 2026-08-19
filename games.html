@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popular Games</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="kjogenq/images/8e534619-dec9-48f0-be28-0f3a3f448dde.png"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 255, 255, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(0, 255, 128, 0.1),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #050505, #111111, #050505);
+        background-attachment: fixed;
+        background-size: cover;
+        color: white;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 32px;
+        margin-bottom: 40px;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      }
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 95%;
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .game-card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 22px;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(0, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.7),
+          0 0 40px rgba(0, 255, 255, 0.2);
+        border-color: #00ffff;
+      }
+
+      .game-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .game-info {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      .game-title {
+        font-size: 22px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .game-date {
+        font-size: 13px;
+        color: #00ffff;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .game-desc {
+        font-size: 14px;
+        color: #aaa;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      .game-link {
+        display: inline-block;
+        width: 100%;
+        padding: 13px;
+        background: linear-gradient(90deg, #00ffff, #00ff80);
+        border: none;
+        border-radius: 25px;
+        color: #000;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s;
+        box-sizing: border-box;
+      }
+
+      .game-link:hover {
+        background: linear-gradient(90deg, #00ff80, #00ffff);
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.45);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>All Popular Games</h1>
+    <div class="games-grid" id="games-container"></div>
+
+    <script>
+      const generalGames = [
+        {
+          title: "Grand Theft Auto V",
+          date: "14.04.2015",
+          id: 271590,
+          desc: "Լոս Սանտոս մեծ քաղաքի քրեական կյանքը և հսկայական օնլայն ռեժիմը։",
+        },
+        {
+          title: "Counter-Strike 2",
+          date: "27.09.2023",
+          id: 730,
+          desc: "Աշխարհի ամենահայտնի տակտիկական թիմային հրաձիգը (shooter)։",
+        },
+        {
+          title: "Dota 2",
+          date: "09.07.2013",
+          id: 570,
+          desc: "Միլիոնավոր երկրպագուներ ունեցող հանրահայտ MOBA ժանրի թիմային խաղ։",
+        },
+        {
+          title: "Red Dead Redemption 2",
+          date: "05.12.2019",
+          id: 1174180,
+          desc: "Ռոքսթարի գլուխգործոցը Վայրի Արևմուտքի և ավազակ Արթուր Մորգանի մասին։",
+        },
+        {
+          title: "Cyberpunk 2077",
+          date: "10.12.2020",
+          id: 1091500,
+          desc: "Ապագայի Նայթ Սիթի քաղաքը՝ կիբեր-իմպլանտներով և մեծ սյուժեով։",
+        },
+        {
+          title: "PUBG: BATTLEGROUNDS",
+          date: "21.12.2017",
+          id: 578080,
+          desc: "Օրիգինալ արքայական մարտը (Battle Royale), որտեղ 100 հոգուց միայն մեկն է հաղթում։",
+        },
+        {
+          title: "Apex Legends",
+          date: "04.02.2019",
+          id: 1172470,
+          desc: "Դինամիկ և արագընթաց թիմային արքայական մարտ տարբեր հերոսներով։",
+        },
+        {
+          title: "Rust",
+          date: "08.02.2018",
+          id: 252490,
+          desc: "Դաժան գոյատևման օնլայն խաղ, որտեղ պետք է տուն կառուցել և պաշտպանվել ռեյդերից։",
+        },
+        {
+          title: "Terraria",
+          date: "16.05.2011",
+          id: 105600,
+          desc: "Հանրաճանաչ 2D արկածային աշխարհ՝ կառուցման մեծ հնարավորություններով։",
+        },
+        {
+          title: "Garry's Mod",
+          date: "29.11.2006",
+          id: 4000,
+          desc: "Ֆիզիկայի հսկայական sandbox խաղ, որտեղ կարող եք անել այն ամենը, ինչ կցանկանաք։",
+        },
+        {
+          title: "Euro Truck Simulator 2",
+          date: "12.10.2012",
+          id: 227300,
+          desc: "Եվրոպայի ճանապարհներով բեռնատար մեքենաներ վարելու հանգիստ սիմուլյատոր։",
+        },
+        {
+          title: "Forza Horizon 5",
+          date: "09.11.2021",
+          id: 1551360,
+          desc: "Անհավանական գեղեցիկ մրցարշավային խաղ (racing) Մեքսիկայի բաց տարածքներում։",
+        },
+        {
+          title: "Rocket League",
+          date: "07.07.2015",
+          id: 252950,
+          desc: "Յուրօրինակ և զվարճալի ֆուտբոլ՝ սպորտային մեքենաների օգնությամբ։",
+        },
+        {
+          title: "Sea of Thieves",
+          date: "03.06.2020",
+          id: 1172620,
+          desc: "Ծովահենների կյանքի օնլայն սիմուլյատոր՝ նավերով և գանձերի որոնումներով։",
+        },
+        {
+          title: "Deep Rock Galactic",
+          date: "13.05.2020",
+          id: 548430,
+          desc: "Տիեզերական թզուկ-հանքափորների կոոպերատիվ խաղ մոլորակի ընդերքի հրեշների դեմ։",
+        },
+        {
+          title: "Subnautica",
+          date: "23.01.2018",
+          id: 264710,
+          desc: "Օվկիանոսային անհայտ մոլորակի ստորջրյա գեղեցիկ և վտանգավոր գոյատևման խաղ։",
+        },
+        {
+          title: "Factorio",
+          date: "14.08.2020",
+          id: 427520,
+          desc: "Ավտոմատացված հսկայական գործարանների կառուցման ռազմավարական խաղ։",
+        },
+        {
+          title: "Stardew Valley",
+          date: "26.02.2016",
+          id: 413150,
+          desc: "Ողջ աշխարհում սիրված հանգստացնող ֆերմերային RPG խաղ։",
+        },
+        {
+          title: "Hollow Knight",
+          date: "24.02.2017",
+          id: 367520,
+          desc: "Միջատների հնագույն թագավորության մասին լավագույն ինդի խաղերից մեկը։",
+        },
+        {
+          title: "Phasmophobia",
+          date: "18.09.2020",
+          id: 739630,
+          desc: "Ուրվականների որսի մասին հանրահայտ կոոպերատիվ սարսափ խաղը։",
+        },
+        {
+          title: "The Forest",
+          date: "30.04.2018",
+          id: 242760,
+          desc: "Կղզու վրա կանիբալներից պաշտպանվելու և գոյատևելու հիթ խաղը։",
+        },
+        {
+          title: "Dead by Daylight",
+          date: "14.06.2016",
+          id: 381210,
+          desc: "Մանիակի և 4 փրկվողների հավերժական օնլայն պայքարը։",
+        },
+        {
+          title: "Left 4 Dead 2",
+          date: "17.11.2009",
+          id: 550,
+          desc: "Կուլտային թիմային զոմբի-շութեր Valve ընկերությունից։",
+        },
+        {
+          title: "Hearts of Iron IV",
+          date: "06.06.2016",
+          id: 394360,
+          desc: "Երկրորդ համաշխարհային պատերազմի գլոբալ տակտիկական ռազմավարություն։",
+        },
+        {
+          title: "Cities: Skylines",
+          date: "10.03.2015",
+          id: 255710,
+          desc: "Սեփական մեծ մեգապոլիսը կառուցելու և կառավարելու լավագույն սիմուլյատորը։",
+        },
+        {
+          title: "Dead Cells",
+          date: "07.08.2018",
+          id: 588650,
+          desc: "Արագընթաց rogue-lite խաղ փոխվող քարտեզներով և բազմազան զենքերով։",
+        },
+        {
+          title: "Payday 2",
+          date: "13.08.2013",
+          id: 218620,
+          desc: "Բանկերի կազմակերպված թալանի թիմային դինամիկ շութեր խաղ։",
+        },
+        {
+          title: "Among Us",
+          date: "16.11.2018",
+          id: 945360,
+          desc: "Տիեզերանավի վրա դավաճանին (impostor) գտնելու հանրահայտ սոցիալական խաղ։",
+        },
+        {
+          title: "Fall Guys",
+          date: "04.08.2020",
+          id: 1097150,
+          desc: "Գունեղ և զվարճալի խոչընդոտների հաղթահարման օնլայն մրցույթ։",
+        },
+        {
+          title: "The Witcher 3: Wild Hunt",
+          date: "19.05.2015",
+          id: 292030,
+          desc: "Կախարդ Գերալտի էպիկական ֆենտեզի արկածային պատմությունը։",
+        },
+        {
+          title: "Doom Eternal",
+          date: "20.03.2020",
+          id: 782330,
+          desc: "Անդադար էներգիայով լի շութեր երկրի վրա դևերի ոչնչացման մասին։",
+        },
+        {
+          title: "Sid Meier’s Civilization VI",
+          date: "21.10.2016",
+          id: 289070,
+          desc: "Կառուցեք ձեր սեփական կայսրությունը քարի դարից մինչև տիեզերական ապագա։",
+        },
+      ];
+
+      const container = document.getElementById("games-container");
+      generalGames.forEach((game) => {
+        container.innerHTML += `
+                <div class="game-card">
+                    <img src="https://steamstatic.com{game.id}/header.jpg" alt="${game.title}" class="game-img">
+                    <div class="game-info">
+                        <div>
+                            <h3 class="game-title">${game.title}</h3>
+                            <div class="game-date">📅 Դուրս է եկել՝ ${game.date}</div>
+                            <p class="game-desc">${game.desc}</p>
+                        </div>
+                        <a href="https://steampowered.com{game.id}/" target="_blank" class="game-link">Դիտել Steam-ում</a>
+                    </div>
+                </div>`;
+      });
+    </script>
+  </body>
+</html>

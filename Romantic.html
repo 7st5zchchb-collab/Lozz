@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Romantic Games</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="kjogenq/images/8e534619-dec9-48f0-be28-0f3a3f448dde.png"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 255, 255, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(0, 255, 128, 0.1),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #050505, #111111, #050505);
+        background-attachment: fixed;
+        background-size: cover;
+        color: white;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 32px;
+        margin-bottom: 40px;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      }
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 95%;
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .game-card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 22px;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(0, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.7),
+          0 0 40px rgba(0, 255, 255, 0.2);
+        border-color: #00ffff;
+      }
+
+      .game-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .game-info {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      .game-title {
+        font-size: 22px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .game-date {
+        font-size: 13px;
+        color: #00ffff;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .game-desc {
+        font-size: 14px;
+        color: #aaa;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      .game-link {
+        display: inline-block;
+        width: 100%;
+        padding: 13px;
+        background: linear-gradient(90deg, #00ffff, #00ff80);
+        border: none;
+        border-radius: 25px;
+        color: #000;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s;
+        box-sizing: border-box;
+      }
+
+      .game-link:hover {
+        background: linear-gradient(90deg, #00ff80, #00ffff);
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.45);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Romantic & Visual Novels</h1>
+    <div class="games-grid" id="romantic-container"></div>
+
+    <script>
+      const romanticGames = [
+        {
+          title: "Doki Doki Literature Club Plus!",
+          date: "30.06.2021",
+          id: 1388880,
+          desc: "Ռոմանտիկ վիզուալ նովել դպրոցական ակումբի աղջիկների մասին։",
+        },
+        {
+          title: "Doki Doki Literature Club!",
+          date: "22.09.2017",
+          id: 698780,
+          desc: "Բնօրինակ հանրահայտ անվճար հոգեբանական նովելը։",
+        },
+        {
+          title: "Slay the Princess",
+          date: "23.10.2023",
+          id: 1094420,
+          desc: "Ինտերակտիվ սիրային-սարսափ պատմություն ընտրության մեծ ազատությամբ։",
+        },
+        {
+          title: "Clannad",
+          date: "23.11.2015",
+          id: 324160,
+          desc: "Լեգենդար և չափազանց հուզիչ սիրային պատմություն, որը ստիպում է արտասվել։",
+        },
+        {
+          title: "Steins;Gate",
+          date: "08.09.2016",
+          id: 412830,
+          desc: "Գիտաֆանտաստիկ նովել ժամանակի միջով ճամփորդությունների և հարաբերությունների մասին։",
+        },
+        {
+          title: "Hatoful Boyfriend",
+          date: "04.09.2014",
+          id: 310080,
+          desc: "Յուրօրինակ պարոդիական սիմուլյատոր, որտեղ պետք է հանդիպել աղավնիների հետ։",
+        },
+        {
+          title: "Stardew Valley",
+          date: "26.02.2016",
+          id: 413150,
+          desc: "Ֆերմերային կյանք, որտեղ կարող եք ընկերանալ և ամուսնանալ գյուղի բնակիչների հետ։",
+        },
+        {
+          title: "The Sims 4",
+          date: "02.09.2014",
+          id: 1222670,
+          desc: "Կյանքի սիմուլյատոր, որտեղ կարող եք ստեղծել ընտանիք և զարգացնել սիրավեպեր։",
+        },
+        {
+          title: "Cyberpunk 2077",
+          date: "10.12.2020",
+          id: 1091500,
+          desc: "Ապագայի քաղաք, որտեղ կան վառ արտահայտված սիրային գծեր (Ջուդի, Պանամ)։",
+        },
+        {
+          title: "Life is Strange",
+          date: "30.01.2015",
+          id: 319630,
+          desc: "Ժամանակը հետ տալու ուժով աղջկա պատմությունը՝ լի ընկերությամբ ու սիրով։",
+        },
+        {
+          title: "Life is Strange: Before the Storm",
+          date: "31.08.2017",
+          id: 554620,
+          desc: "Քլոեի և Ռեյչելի հարաբերությունների նախապատմությունը պատմող խաղ։",
+        },
+        {
+          title: "Life is Strange 2",
+          date: "27.09.2018",
+          id: 532210,
+          desc: "Երկու եղբայրների հուզիչ ճանապարհորդությունը Ամերիկայով։",
+        },
+        {
+          title: "Life is Strange: True Colors",
+          date: "09.09.2021",
+          id: 936790,
+          desc: "Էմպատիկ ուժերով աղջկա պատմությունը, ով բացահայտում է եղբոր մահվան գաղտնիքը։",
+        },
+        {
+          title: "Mass Effect Legendary Edition",
+          date: "14.05.2021",
+          id: 1328670,
+          desc: "Տիեզերական եռերգություն, որտեղ թիմակիցների հետ սիրավեպերը կարևոր դեր ունեն։",
+        },
+        {
+          title: "Dragon Age: Inquisition",
+          date: "18.11.2014",
+          id: 1222690,
+          desc: "Ֆենտեզի RPG RPG տարրերով և կերպարների հետ խորը հարաբերություններով։",
+        },
+        {
+          title: "Baldur's Gate 3",
+          date: "03.08.2023",
+          id: 1086940,
+          desc: "Դարի լավագույն RPG-ն՝ անհավանական զարգացած սիրային և ընկերական գծերով։",
+        },
+        {
+          title: "Hunky Dory / Catherine Classic",
+          date: "10.01.2019",
+          id: 893180,
+          desc: "Հանելուկ-խաղ տղամարդու մասին, ով խճճվել է երկու կանանց սիրո միջև։",
+        },
+        {
+          title: "Monster Prom",
+          date: "27.04.2018",
+          id: 743450,
+          desc: "Զվարճալի մուլտիփլեյեր սիմուլյատոր հրեշների դպրոցում ավարտական երեկույթի զուգընկեր գտնելու մասին։",
+        },
+        {
+          title: "NEKOPARA Vol. 1",
+          date: "29.12.2014",
+          id: 333600,
+          desc: "Հանրաճանաչ անիմե նովել կատու-աղջիկների և սրճարանի կյանքի մասին։",
+        },
+        {
+          title: "Dream Daddy",
+          date: "20.07.2017",
+          id: 654880,
+          desc: "Հումորային սիմուլյատոր հայրիկների մասին, ովքեր հանդիպում են միմյանց հետ։",
+        },
+        {
+          title: "Boyfriend Dungeon",
+          date: "11.08.2021",
+          id: 1055900,
+          desc: "Խաղ, որտեղ դուք մտնում եք քարանձավներ, իսկ ձեր զենքերը վերածվում են գեղեցիկ մարդկանց։",
+        },
+        {
+          title: "Haven",
+          date: "03.12.2020",
+          id: 983970,
+          desc: "Պատմություն երկու սիրահարների մասին, ովքեր փախել են անհայտ մոլորակ միասին լինելու համար։",
+        },
+        {
+          title: "To the Moon",
+          date: "01.11.2011",
+          id: 206440,
+          desc: "Փոքրիկ, բայց հանճարեղ պատմություն ծերունու վերջին սիրո և տիեզերք թռչելու երազանքի մասին։",
+        },
+        {
+          title: "Finding Paradise",
+          date: "14.12.2017",
+          id: 337340,
+          desc: "To the Moon խաղի հուզիչ շարունակությունը հիշողությունների փոփոխման մասին։",
+        },
+        {
+          title: "Impostor Factory",
+          date: "30.09.2021",
+          id: 1182620,
+          desc: "Երրորդ մասը սիրված դրամատիկ պատմությունների շարքից։",
+        },
+        {
+          title: "Florence",
+          date: "13.02.2020",
+          id: 1102130,
+          desc: "Կարճ ինտերակտիվ պատմություն առաջին սիրո, ոգեշնչման և բաժանման մասին։",
+        },
+        {
+          title: "Coffee Talk",
+          date: "29.01.2020",
+          id: 914800,
+          desc: "Լսեք ֆենտեզի արարածների սիրային ու կյանքի պատմությունները՝ նրանց սուրճ պատրաստելով։",
+        },
+        {
+          title: "Coffee Talk Episode 2",
+          date: "20.04.2023",
+          id: 1663220,
+          desc: "Հանգիստ սրճարանային զրույցների շարունակությունը գիշերային քաղաքում։",
+        },
+        {
+          title: "Sea Bed",
+          date: "19.12.2017",
+          id: 583090,
+          desc: "Խորհրդավոր հոգեբանական նովել երկու աղջիկների անցյալի և սիրո մասին։",
+        },
+        {
+          title: "Our Life: Beginnings & Always",
+          date: "16.11.2020",
+          id: 1129580,
+          desc: "Շատ ջերմ և անվճար խաղ հարևան տղայի հետ մանկությունից մինչև մեծահասակ կյանք մեծանալու մասին։",
+        },
+        {
+          title: "The Walking Dead: Season 1",
+          date: "24.04.2012",
+          id: 207610,
+          desc: "Չնայած զոմբիներին, այն պատմում է հայրական սիրո և կապվածության ամենահզոր պատմությունը։",
+        },
+        {
+          title: "Clannad Side Stories",
+          date: "02.06.2016",
+          id: 406030,
+          desc: "Հավելյալ սիրային և ընկերական կարճ պատմություններ Կլաննադի աշխարհից։",
+        },
+      ];
+
+      const container = document.getElementById("romantic-container");
+      romanticGames.forEach((game) => {
+        container.innerHTML += `
+                <div class="game-card">
+                    <img src="https://steamstatic.com{game.id}/header.jpg" alt="${game.title}" class="game-img">
+                    <div class="game-info">
+                        <div>
+                            <h3 class="game-title">${game.title}</h3>
+                            <div class="game-date">📅 Դուրս է եկել՝ ${game.date}</div>
+                            <p class="game-desc">${game.desc}</p>
+                        </div>
+                        <a href="https://steampowered.com{game.id}/" target="_blank" class="game-link">Դիտել Steam-ում</a>
+                    </div>
+                </div>`;
+      });
+    </script>
+  </body>
+</html>

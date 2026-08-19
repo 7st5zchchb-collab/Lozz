@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="kjogenq/styles/styles.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="kjogenq/images/8e534619-dec9-48f0-be28-0f3a3f448dde.png"
+    />
+
+    <style>
+      /* Ապահովում ենք, որ դաշտերը իրար մեջ չմտնեն և ունենան հստակ դիրք */
+      .input-box {
+        position: relative !important;
+        margin: 35px 0 !important;
+        width: 100% !important;
+      }
+
+      .input-box input {
+        width: 100% !important;
+        padding: 10px 5px !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.35) !important;
+        outline: none !important;
+        color: white !important;
+        font-size: 16px !important;
+        display: block !important;
+        transition: 0.3s !important;
+      }
+
+      .input-box span {
+        position: absolute !important;
+        left: 5px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+        font-size: 16px !important;
+        pointer-events: none !important;
+        transition: 0.2s ease-out !important;
+      }
+
+      /* Անիմացիա. երբ դաշտը ակտիվ է կամ դատարկ չէ, տեքստը գեղեցիկ բարձրանում է վերև */
+      .input-box input:focus + span,
+      .input-box input:not(:placeholder-shown) + span {
+        top: -12px !important;
+        left: 0 !important;
+        font-size: 12px !important;
+        color: #00ffff !important;
+      }
+
+      .input-box input:focus {
+        border-bottom-color: #00ffff !important;
+      }
+    </style>
+  </head>
+  <body>
+    <code>
+      <div class="form-container">
+        <h2>Login</h2>
+
+        <!-- Դաշտ 1: Account Number -->
+        <div class="input-box">
+          <input
+            type="text"
+            id="accountNumber"
+            placeholder=" "
+            autocomplete="off"
+          />
+          <span>Account Number</span>
+        </div>
+
+        <!-- Դաշտ 2: Password -->
+        <div class="input-box">
+          <input type="password" id="password" placeholder=" " />
+          <span>Password</span>
+        </div>
+
+        <button class="submit-btn" id="loginBtn">Login</button>
+
+        <button
+          class="signup-btn"
+          onclick="window.location.href = 'register.html'"
+        >
+          Sign Up
+        </button>
+      </div>
+    </code>
+
+    <script>
+      document
+        .getElementById("loginBtn")
+        .addEventListener("click", async function () {
+          const account = document.getElementById("accountNumber").value.trim();
+
+          const pass = document.getElementById("password").value;
+
+          /* Դաշտերը դատարկ են՞ */
+
+          if (account === "" || pass === "") {
+            alert("Խնդրում ենք լրացնել բոլոր դաշտերը։");
+            return;
+          }
+
+          /* ԿԱՊԸ ՍԵՐՎԵՐԻ ՀԵՏ */
+
+          try {
+            const response = await fetch("/api/login", {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                username: account,
+                password: pass,
+              }),
+            });
+
+            const data = await response.json();
+
+            /* Հաջող Login */
+
+            if (response.ok) {
+              alert(data.message);
+
+              localStorage.setItem("isLoggedIn", "true");
+
+              localStorage.setItem("username", account);
+
+              window.location.href = "Index (2).html";
+            } else {
+              alert(data.error);
+            }
+          } catch (error) {
+            alert("Սերվերի սխալ: Համոզվեք, որ Node.js սերվերը միացված է:");
+          }
+        });
+
+      /* ENTER ՍԵՂՄԵԼՈՒ ԴԵՊՔՈՒՄ LOGIN */
+
+      document.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+
+          document.getElementById("loginBtn").click();
+        }
+      });
+    </script>
+  </body>
+</html>

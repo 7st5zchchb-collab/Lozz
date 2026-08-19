@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horror Games</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="kjogenq/images/8e534619-dec9-48f0-be28-0f3a3f448dde.png"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 255, 255, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(0, 255, 128, 0.1),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #050505, #111111, #050505);
+        background-attachment: fixed;
+        background-size: cover;
+        color: white;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 32px;
+        margin-bottom: 40px;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      }
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 95%;
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .game-card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 22px;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(0, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.7),
+          0 0 40px rgba(0, 255, 255, 0.2);
+        border-color: #00ffff;
+      }
+
+      .game-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .game-info {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      .game-title {
+        font-size: 22px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .game-date {
+        font-size: 13px;
+        color: #00ffff;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .game-desc {
+        font-size: 14px;
+        color: #aaa;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      .game-link {
+        display: inline-block;
+        width: 100%;
+        padding: 13px;
+        background: linear-gradient(90deg, #00ffff, #00ff80);
+        border: none;
+        border-radius: 25px;
+        color: #000;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s;
+        box-sizing: border-box;
+      }
+
+      .game-link:hover {
+        background: linear-gradient(90deg, #00ff80, #00ffff);
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.45);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Horror Games</h1>
+    <div class="games-grid" id="horror-container"></div>
+
+    <script>
+      const horrorGames = [
+        {
+          title: "Resident Evil 4 Remake",
+          date: "24.03.2023",
+          id: 2050650,
+          desc: "Լեգենդար սարսափ խաղի ժամանակակից վերաթողարկումը գործակալ Լեոնի մասին։",
+        },
+        {
+          title: "Resident Evil 5",
+          date: "15.09.2009",
+          id: 23310,
+          desc: "Քրիս Ռեդֆիլդի արկածները Աֆրիկայում՝ կենսաբանական վարակի դեմ։",
+        },
+        {
+          title: "Dark Souls: Prepare To Die",
+          date: "24.08.2012",
+          id: 211420,
+          desc: "Մռայլ և դժվար հաղթահարելի RPG խաղ սարսափազդու արարածներով։",
+        },
+        {
+          title: "Warhammer: Vermintide 2",
+          date: "08.03.2018",
+          id: 552500,
+          desc: "Կոոպերատիվ մարտական խաղ հսկայական մուտանտ առնետների դեմ։",
+        },
+        {
+          title: "Outlast",
+          date: "04.09.2013",
+          id: 238320,
+          desc: "Հոգեբուժարանում գոյատևելու սարսափ խաղ, որտեղ ձեր միակ զենքը տեսախցիկն է։",
+        },
+        {
+          title: "Outlast 2",
+          date: "25.04.2017",
+          id: 414700,
+          desc: "Առաջին դեմքից survival horror խաղ խորհրդավոր պաշտամունքի մասին։",
+        },
+        {
+          title: "Amnesia: The Dark Descent",
+          date: "08.09.2010",
+          id: 57300,
+          desc: "Կլասիկ սարսափ խաղ, որտեղ պետք է փախչել հրեշներից հին ամրոցում։",
+        },
+        {
+          title: "Amnesia: Rebirth",
+          date: "20.10.2020",
+          id: 999220,
+          desc: "Նոր պատմություն Ամնեզիայի աշխարհում՝ անապատի մութ գաղտնիքներով։",
+        },
+        {
+          title: "Dead By Daylight",
+          date: "14.06.2016",
+          id: 381210,
+          desc: "Մուլտիփլեյեր խաղ, որտեղ մեկ մանիակ որսում է չորս փրկվողներին։",
+        },
+        {
+          title: "Phasmophobia",
+          date: "18.09.2020",
+          id: 739630,
+          desc: "4 հոգանոց կոոպերատիվ հոգեբանական սարսափ խաղ ուրվականների որսի մասին։",
+        },
+        {
+          title: "The Forest",
+          date: "30.04.2018",
+          id: 242760,
+          desc: "Ինքնաթիռի վթարից հետո պետք է գոյատևել կղզում՝ կանիբալների կողքին։",
+        },
+        {
+          title: "Sons Of The Forest",
+          date: "23.02.2023",
+          id: 1326420,
+          desc: "Հանրահայտ The Forest խաղի շարունակությունը՝ ավելի մեծ հնարավորություններով։",
+        },
+        {
+          title: "Alien: Isolation",
+          date: "06.10.2014",
+          id: 214490,
+          desc: "Տիեզերական սարսափ խաղ, որտեղ ձեզ հետապնդում է անկանխատեսելի Չուժոյը։",
+        },
+        {
+          title: "Dead Space (2023)",
+          date: "27.01.2023",
+          id: 1693980,
+          desc: "Իսահակ Կլարկի գոյատևման լեգենդար տիեզերական sci-fi սարսափի ռիմեյքը։",
+        },
+        {
+          title: "Dead Space 2",
+          date: "27.01.2011",
+          id: 47780,
+          desc: "Նեկրոմորֆների դեմ պայքարի շարունակությունը հսկայական տիեզերակայանում։",
+        },
+        {
+          title: "The Evil Within",
+          date: "14.10.2014",
+          id: 268050,
+          desc: "Resident Evil-ի ստեղծողի կողմից պատրաստված հոգեբանական մղձավանջ։",
+        },
+        {
+          title: "The Evil Within 2",
+          date: "13.10.2017",
+          id: 601430,
+          desc: "Դետեկտիվ Սեբաստիանի նոր ճանապարհորդությունը սարսափների աշխարհում։",
+        },
+        {
+          title: "Alan Wake 2",
+          date: "27.10.2023",
+          id: 1426210,
+          desc: "Մութ պատմություն գրողի և ՀԴԲ գործակալի մասին՝ լի հոգեբանական թրիլերով։",
+        },
+        {
+          title: "Silent Hill 2 Remake",
+          date: "08.10.2024",
+          id: 2124490,
+          desc: "Բոլոր ժամանակների ամենահայտնի հոգեբանական սարսափ խաղի պաշտոնական ռիմեյքը։",
+        },
+        {
+          title: "Left 4 Dead 2",
+          date: "17.11.2009",
+          id: 550,
+          desc: "Valve-ի կուլտային զոմբի-շութերը, որը մինչ օրս սիրված է միլիոնների կողմից։",
+        },
+        {
+          title: "Dying Light",
+          date: "26.01.2015",
+          id: 239140,
+          desc: "Զոմբի-ապոկալիպսիս, պարկուր և բաց աշխարհ, որտեղ գիշերը հրեշներն են որս անում։",
+        },
+        {
+          title: "Dying Light 2",
+          date: "04.02.2022",
+          id: 534380,
+          desc: "Մարդկության վերջին ամրոցը զոմբիների դեմ պայքարում՝ ընտրության հնարավորությամբ։",
+        },
+        {
+          title: "SOMA",
+          date: "22.09.2015",
+          id: 282140,
+          desc: "Գիտաֆանտաստիկ սարսափ խաղ օվկիանոսի հատակին գտնվող լաբորատորիայում։",
+        },
+        {
+          title: "Little Nightmares",
+          date: "28.04.2017",
+          id: 424840,
+          desc: "Մթնոլորտային հարթակային (platformer) սարսափ խաղ մանկական վախերի մասին։",
+        },
+        {
+          title: "Little Nightmares II",
+          date: "11.02.2021",
+          id: 860510,
+          desc: "Մոնո անունով տղայի և Սիքսի նոր արկածները աղավաղված աշխարհում։",
+        },
+        {
+          title: "Metro 2033 Redux",
+          date: "26.08.2014",
+          id: 286690,
+          desc: "Մոսկվայի մետրոյի ստորգետնյա թունելների հետապոկալիպտիկ սարսափ-շութեր։",
+        },
+        {
+          title: "Metro Last Light Redux",
+          date: "26.08.2014",
+          id: 287390,
+          desc: "Արտյոմի պատմության շարունակությունը մետրոյի մութ ու վտանգավոր աշխարհում։",
+        },
+        {
+          title: "Metro Exodus",
+          date: "15.02.2019",
+          id: 412020,
+          desc: "Ճամփորդություն գնացքով Ռուսաստանի ավերված տարածքներով՝ մուտանտների դեմ։",
+        },
+        {
+          title: "Layers of Fear",
+          date: "15.02.2016",
+          id: 391720,
+          desc: "Հոգեբանական սարսափ խաղ խենթացած նկարչի և իր տան պատկերների մասին։",
+        },
+        {
+          title: "Visage",
+          date: "30.10.2020",
+          id: 594330,
+          desc: "P.T.-ի ոգով ստեղծված անդադար վախ ներշնչող տան հետախուզման խաղ։",
+        },
+        {
+          title: "The Medium",
+          date: "28.01.2021",
+          id: 1293100,
+          desc: "Խաղ միաժամանակ երկու իրականություններում՝ ֆիզիկական և հոգևոր աշխարհներում։",
+        },
+        {
+          title: "Cry of Fear",
+          date: "25.04.2013",
+          id: 223710,
+          desc: "Հոգեբանական հին, բայց չափազանց սարսափելի անվճար մոդիֆիկացիա-խաղ։",
+        },
+      ];
+
+      const container = document.getElementById("horror-container");
+      horrorGames.forEach((game) => {
+        container.innerHTML += `
+                <div class="game-card">
+                    <img src="https://steamstatic.com{game.id}/header.jpg" alt="${game.title}" class="game-img">
+                    <div class="game-info">
+                        <div>
+                            <h3 class="game-title">${game.title}</h3>
+                            <div class="game-date">📅 Դուրս է եկել՝ ${game.date}</div>
+                            <p class="game-desc">${game.desc}</p>
+                        </div>
+                        <a href="https://steampowered.com{game.id}/" target="_blank" class="game-link">Դիտել Steam-ում</a>
+                    </div>
+                </div>`;
+      });
+    </script>
+  </body>
+</html>

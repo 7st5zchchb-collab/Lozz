@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Կարգավորումներ</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        margin: 0;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .settings-container {
+        max-width: 600px;
+        width: 100%;
+        background-color: #262626;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        color: #ff4747;
+        border-bottom: 2px solid #333;
+        padding-bottom: 10px;
+        margin-top: 0;
+      }
+
+      .setting-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #333;
+      }
+
+      .setting-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 18px;
+      }
+
+      .setting-info p {
+        margin: 0;
+        color: #b3b3b3;
+        font-size: 14px;
+      }
+
+      select {
+        background-color: #333;
+        color: white;
+        border: 1px solid #555;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      /* Չեքբոքսի (Switch) ոճավորում */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #555;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #ff4747;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(24px);
+      }
+
+      /* Կոճակների խումբ */
+      .btn-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+      }
+
+      .save-btn {
+        background-color: #ff4747;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .save-btn:hover {
+        background-color: #cc3939;
+      }
+
+      .back-btn {
+        color: #b3b3b3;
+        text-decoration: none;
+        padding: 10px 0;
+        font-weight: bold;
+        display: inline-block;
+        align-self: center;
+      }
+
+      .back-btn:hover {
+        color: white;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="settings-container">
+      <h1 id="pageTitle">Կարգավորումներ</h1>
+
+      <!-- 1. Էջի Թեման -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <h3 id="themeTitle">Էջի Թեման (Theme)</h3>
+          <p id="themeDesc">Ընտրեք կայքի արտաքին տեսքի գույնը</p>
+        </div>
+        <select id="themeSelect">
+          <option value="dark" selected>Մուգ (Dark)</option>
+          <option value="light">Լուսավոր (Light)</option>
+          <option value="cyberpunk">Կիբերպանկ</option>
+        </select>
+      </div>
+
+      <!-- 2. Ծանուցումներ -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <h3 id="notifTitle">Ծանուցումներ (Notifications)</h3>
+          <p id="notifDesc">Ստանալ հաղորդագրություններ նոր խաղերի մասին</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- 3. Կայքի Լեզուն -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <h3 id="langTitle">Կայքի Լեզուն (Language)</h3>
+          <p id="langDesc">Փոխել հիմնական տեքստերի լեզուն</p>
+        </div>
+        <select id="langSelect">
+          <option value="hy" selected>Հայերեն</option>
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+        </select>
+      </div>
+
+      <!-- 4. Ավտոմատ թերթում -->
+      <div class="setting-row">
+        <div class="setting-info">
+          <h3 id="slideTitle">Ավտոմատ սլայդեր</h3>
+          <p id="slideDesc">Թույլ տալ, որ նկարները ավտոմատ թերթվեն</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Կոճակների հատվածը -->
+      <div class="btn-group">
+        <button class="save-btn" id="saveBtn">Պահպանել</button>
+        <a href="Index (2).html" class="back-btn" id="backBtn">← Հետ գնալ</a>
+      </div>
+    </div>
+
+    <!-- ԼԵԶՈՒՆ ՓՈԽՈՂ ԵՎ ԲՐԱՈՒԶԵՐՈՒՄ ՊԱՀՊԱՆՈՂ ՋԱՎԱՍԿՐԻՊՏԸ -->
+    <script>
+      // Բառարան երեք լեզուների համար
+      const translations = {
+        hy: {
+          title: "Կարգավորումներ",
+          themeTitle: "Էջի Թեման (Theme)",
+          themeDesc: "Ընտրեք կայքի արտաքին տեսքի գույնը",
+          notifTitle: "Ծանուցումներ (Notifications)",
+          notifDesc: "Ստանալ հաղորդագրություններ նոր խաղերի մասին",
+          langTitle: "Կայքի Լեզուն (Language)",
+          langDesc: "Փոխել հիմնական տեքստերի լեզուն",
+          slideTitle: "Ավտոմատ սլայդեր",
+          slideDesc: "Թույլ տալ, որ նկարները ավտոմատ թերթվեն",
+          save: "Պահպանել",
+          back: "← Հետ գնալ",
+        },
+        en: {
+          title: "Settings",
+          themeTitle: "Page Theme",
+          themeDesc: "Select the appearance color of the website",
+          notifTitle: "Notifications",
+          notifDesc: "Receive messages about new games",
+          langTitle: "Language",
+          langDesc: "Change the main text language",
+          slideTitle: "Auto Slider",
+          slideDesc: "Allow images to slide automatically",
+          save: "Save",
+          back: "← Go Back",
+        },
+        ru: {
+          title: "Настройки",
+          themeTitle: "Тема страницы",
+          themeDesc: "Выберите цвет внешнего вида сайта",
+          notifTitle: "Уведомления",
+          notifDesc: "Получать сообщения о новых играх",
+          langTitle: "Язык сайта",
+          langDesc: "Изменить язык основного текста",
+          slideTitle: "Автослайдер",
+          slideDesc: "Разрешить автоматическую прокрутку картинок",
+          save: "Сохранить",
+          back: "← Назад",
+        },
+      };
+
+      const langSelect = document.getElementById("langSelect");
+
+      // Ֆունկցիա, որը փոխում է տեքստերը էջում
+      function applyLanguage(lang) {
+        const langData = translations[lang];
+        if (!langData) return;
+
+        document.getElementById("pageTitle").innerText = langData.title;
+        document.getElementById("themeTitle").innerText = langData.themeTitle;
+        document.getElementById("themeDesc").innerText = langData.themeDesc;
+        document.getElementById("notifTitle").innerText = langData.notifTitle;
+        document.getElementById("notifDesc").innerText = langData.notifDesc;
+        document.getElementById("langTitle").innerText = langData.langTitle;
+        document.getElementById("langDesc").innerText = langData.langDesc;
+        document.getElementById("slideTitle").innerText = langData.slideTitle;
+        document.getElementById("slideDesc").innerText = langData.slideDesc;
+        document.getElementById("saveBtn").innerText = langData.save;
+        document.getElementById("backBtn").innerText = langData.back;
+
+        langSelect.value = lang; // Փոխում է ընտրացանկի ընթացիկ արժեքը
+      }
+
+      // 1. Երբ էջը թարմացվում կամ բացվում է, ստուգում ենք պահպանված լեզուն
+      const savedLanguage = localStorage.getItem("userLanguage") || "hy";
+      applyLanguage(savedLanguage);
+
+      // 2. Երբ օգտատերը ընտրացանկից ուղղակի լեզու է ընտրում (ակնթարթային տեսքի համար)
+      langSelect.addEventListener("change", function () {
+        applyLanguage(this.value);
+      });
+
+      // 3. Երբ սեղմում է «Պահպանել» կոճակը, լեզուն վերջնական ֆիքսվում է localStorage-ում
+      document.getElementById("saveBtn").addEventListener("click", function () {
+        localStorage.setItem("userLanguage", langSelect.value);
+
+        // Ցուցադրում ենք հաղորդագրություն ընտրված լեզվով
+        const currentLang = langSelect.value;
+        if (currentLang === "hy") alert("Կարգավորումները պահպանվեցին։");
+        else if (currentLang === "en") alert("Settings saved successfully!");
+        else if (currentLang === "ru") alert("Настройки сохранены!");
+      });
+    </script>
+  </body>
+</html>

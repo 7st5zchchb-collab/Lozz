@@ -1,0 +1,215 @@
+<!doctype html>
+<html style="color: rgb(0, 0, 0)">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lozz - Games</title>
+    <link rel="stylesheet" href="kjogenq/styles/styles.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="kjogenq/images/8e534619-dec9-48f0-be28-0f3a3f448dde.png"
+    />
+    <script type="text/javascript" src="kjogenq/server.js" defer></script>
+  </head>
+
+  <body class="main-page">
+    <!-- Օգտատիրոջ պրոֆիլը -->
+    <div class="user-profile">
+      <img src="kjogenq/images/avatar.jpg" alt="Avatar" class="user-avatar" />
+
+      <span id="username">Guest</span>
+    </div>
+    <div class="page-layout"></div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search..." />
+      <button>Search</button>
+    </div>
+
+    <!-- Կատեգորիաների բաժին -->
+    <div class="custom-dropdown category-dropdown">
+      <button class="dropdown-btn">Manu ▾</button>
+      <div class="dropdown-menu">
+        <a href="Horror.html">Horror</a>
+        <a href="Romantic.html">Romantic</a>
+        <a href="Fantasy.html">Fantasy</a>
+        <a href="Games.html">Games</a>
+      </div>
+    </div>
+
+    <!-- Օգտատիրոջ / Գլխավոր կոճակի բաժին -->
+    <div class="custom-dropdown account-dropdown">
+      <button class="dropdown-btn round-btn">
+        <img src="kjogenq/images/home.png" alt="Home" class="account-icon" />
+      </button>
+      <div class="dropdown-menu">
+        <a href="account.html">Account</a>
+        <a href="help.html">Help</a>
+        <a href="settings.html">Settings</a>
+      </div>
+    </div>
+
+    <h1>Hi my friend!</h1>
+
+    <!-- Բոլոր խաղերի ընդհանուր բլոկը -->
+    <div class="games-list-wrapper">
+      <!-- 1. Minecraft -->
+      <div class="game-container">
+        <p>
+          1. Minecraft Սա պատմության մեջ ամենավաճառված խաղն է։ Այն բաց աշխարհով
+          սանդբոքս (sandbox) խաղ է, որտեղ խաղացողները կարող են կառուցել ցանկացած
+          բան՝ օգտագործելով տարբեր տեսակի բլոկներ։
+        </p>
+        <div class="slider-wrapper">
+          <button class="arrow-btn prev-btn">❮</button>
+          <div class="slider-images">
+            <img
+              src="kjogenq/images/mine2.jpg"
+              class="slide active"
+              alt="Minecraft 1"
+            />
+            <img
+              src="kjogenq/images/mine3.jpg"
+              class="slide"
+              alt="Minecraft 2"
+            />
+            <img
+              src="kjogenq/images/mine4.jpg"
+              class="slide"
+              alt="Minecraft 3"
+            />
+          </div>
+          <button class="arrow-btn next-btn">❯</button>
+        </div>
+      </div>
+
+      <!-- 2. GTA 5 -->
+      <div class="game-container">
+        <p>
+          2. Grand Theft Auto V (GTA 5) Խաղացողներին տեղափոխում է Սան Անդրեաս
+          հսկայական նահանգ։ Խաղը հայտնի է իր ազատությամբ, մեքենաներ վարելու
+          հնարավորություններով և հետաքրքիր սյուժեով։
+        </p>
+        <div class="slider-wrapper">
+          <button class="arrow-btn prev-btn">❮</button>
+          <div class="slider-images">
+            <img
+              src="kjogenq/images/gta1.jpg"
+              class="slide active"
+              alt="GTA V 1"
+            />
+            <img src="kjogenq/images/gta2.jpg" class="slide" alt="GTA V 2" />
+            <img src="kjogenq/images/gta3.jpg" class="slide" alt="GTA V 3" />
+          </div>
+          <button class="arrow-btn next-btn">❯</button>
+        </div>
+      </div>
+
+      <!-- 3. The Witcher 3 -->
+      <div class="game-container">
+        <p>
+          3. The Witcher 3: Wild Hunt Այս դերային խաղը (RPG) համարվում է բոլոր
+          ժամանակների լավագույն սյուժետային խաղերից մեկը։ Գլխավոր կերպարը՝
+          հրեշներ որսացող Գերալտը, ճանապարհորդում է գեղեցիկ ֆենտեզի աշխարհով։
+        </p>
+        <div class="slider-wrapper">
+          <button class="arrow-btn prev-btn">❮</button>
+          <div class="slider-images">
+            <img
+              src="kjogenq/images/witcher1.jpg"
+              class="slide active"
+              alt="Witcher 3 1"
+            />
+            <img
+              src="kjogenq/images/witcher2.jpg"
+              class="slide"
+              alt="Witcher 3 2"
+            />
+            <img
+              src="kjogenq/images/witcher3.jpg"
+              class="slide"
+              alt="Witcher 3 3"
+            />
+          </div>
+          <button class="arrow-btn next-btn">❯</button>
+        </div>
+      </div>
+
+      <!-- 4. Elden Ring -->
+      <div class="game-container">
+        <p>
+          4. Elden Ring Ստեղծված է FromSoftware ստուդիայի կողմից։ Այս բարդ RPG-ն
+          նվաճեց միլիոնավոր սրտեր իր մռայլ, խորհրդավոր բաց աշխարհով և հզոր
+          բոսերի դեմ անողոք մարտերով։
+        </p>
+        <div class="slider-wrapper">
+          <button class="arrow-btn prev-btn">❮</button>
+          <div class="slider-images">
+            <img
+              src="kjogenq/images/elden1.jpg"
+              class="slide active"
+              alt="Elden Ring 1"
+            />
+            <img
+              src="kjogenq/images/elden2.jpg"
+              class="slide"
+              alt="Elden Ring 2"
+            />
+            <img
+              src="kjogenq/images/elden3.jpg"
+              class="slide"
+              alt="Elden Ring 3"
+            />
+          </div>
+          <button class="arrow-btn next-btn">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ձախ կողմի ժանրերի ցուցակը -->
+    <ul>
+      <li><strong>Գործողությունների խաղեր (Action)</strong>...</li>
+      <li><strong>Դերային խաղեր (RPG)</strong>...</li>
+      <li><strong>Ռազմավարություններ (Strategy)</strong>...</li>
+      <li><strong>Սիմուլյատորներ (Simulator)</strong>...</li>
+      <li><strong>Արկածային և Գլուխկոտրուկներ (Adventure)</strong>...</li>
+    </ul>
+
+    <!-- ԲՈԼՈՐ ՍԼԱՅԴԵՐՆԵՐԸ ԿԱՌԱՎԱՐՈՂ ՈՒՂՂՎԱԾ JS ԿՈԴԸ -->
+    <script>
+      const username = localStorage.getItem("username");
+
+      if (username) {
+        document.getElementById("username").textContent = username;
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        // Գտնում ենք էջի բոլոր սլայդերների բլոկները
+        const containers = document.querySelectorAll(".game-container");
+
+        containers.forEach((container) => {
+          const slides = container.querySelectorAll(".slide");
+          const prevBtn = container.querySelector(".prev-btn");
+          const nextBtn = container.querySelector(".next-btn");
+
+          if (slides.length === 0) return;
+
+          let currentIndex = 0;
+
+          function showSlide(index) {
+            slides[currentIndex].classList.remove("active");
+            currentIndex = (index + slides.length) % slides.length;
+            slides[currentIndex].classList.add("active");
+          }
+
+          nextBtn.addEventListener("click", function () {
+            showSlide(currentIndex + 1);
+          });
+
+          prevBtn.addEventListener("click", function () {
+            showSlide(currentIndex - 1);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

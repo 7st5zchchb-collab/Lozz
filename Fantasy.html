@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="hy">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Games</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(0, 255, 255, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 85% 80%,
+            rgba(0, 255, 128, 0.1),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #050505, #111111, #050505);
+        background-attachment: fixed;
+        background-size: cover;
+        color: white;
+        padding: 40px 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 32px;
+        margin-bottom: 40px;
+        text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      }
+
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        width: 95%;
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+
+      .game-card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 22px;
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(0, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.7),
+          0 0 40px rgba(0, 255, 255, 0.2);
+        border-color: #00ffff;
+      }
+
+      .game-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .game-info {
+        padding: 25px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      .game-title {
+        font-size: 22px;
+        color: white;
+        margin-bottom: 10px;
+      }
+
+      .game-date {
+        font-size: 13px;
+        color: #00ffff;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .game-desc {
+        font-size: 14px;
+        color: #aaa;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+
+      .game-link {
+        display: inline-block;
+        width: 100%;
+        padding: 13px;
+        background: linear-gradient(90deg, #00ffff, #00ff80);
+        border: none;
+        border-radius: 25px;
+        color: #000;
+        font-weight: bold;
+        font-size: 15px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.3s;
+        box-sizing: border-box;
+      }
+
+      .game-link:hover {
+        background: linear-gradient(90deg, #00ff80, #00ffff);
+        box-shadow: 0 8px 25px rgba(0, 255, 255, 0.45);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Fantasy Worlds</h1>
+    <div class="games-grid" id="fantasy-container"></div>
+
+    <script>
+      const fantasyGames = [
+        {
+          title: "The Witcher 3: Wild Hunt",
+          date: "19.05.2015",
+          id: 292030,
+          desc: "Գերալտ Ռիվիացու լեգենդար արկածները հսկայական ֆենտեզի աշխարհում։",
+        },
+        {
+          title: "Hades",
+          date: "17.09.2020",
+          id: 1145360,
+          desc: "Արագընթաց խաղ հունական դիցաբանության և Աիդի թագավորությունից փախուստի մասին։",
+        },
+        {
+          title: "Dark Souls III",
+          date: "12.04.2016",
+          id: 374320,
+          desc: "Մութ ֆենտեզի ժանրի գլուխգործոց դժվար մարտերի սիրահարների համար։",
+        },
+        {
+          title: "Elden Ring",
+          date: "25.02.2022",
+          id: 1245620,
+          desc: "Բաց աշխարհով հսկայական RPG, ստեղծված FromSoftware-ի և Ջորջ Մարտինի կողմից։",
+        },
+        {
+          title: "Skyrim (The Elder Scrolls V)",
+          date: "11.11.2011",
+          id: 489830,
+          desc: "Ամենահայտնի բաց աշխարհով խաղը վիշապների և Դովակինի մասին։",
+        },
+        {
+          title: "The Witcher 2",
+          date: "17.05.2011",
+          id: 20920,
+          desc: "Գերալտի պատմության երկրորդ մասը՝ լի քաղաքական ինտրիգներով և մոգությամբ։",
+        },
+        {
+          title: "Hollow Knight",
+          date: "24.02.2017",
+          id: 367520,
+          desc: "Գեղեցիկ մետրոիդվանիա միջատների հնագույն թագավորության մասին։",
+        },
+        {
+          title: "Divinity: Original Sin 2",
+          date: "14.09.2017",
+          id: 435150,
+          desc: "Լավագույն քայլափոխային (turn-based) ֆենտեզի խաղերից մեկը ընկերների հետ խաղալու համար։",
+        },
+        {
+          title: "Monster Hunter: World",
+          date: "09.08.2018",
+          id: 582010,
+          desc: "Հսկայական ֆենտեզի հրեշների որս՝ տարբեր զենքերով և զրահներով։",
+        },
+        {
+          title: "Final Fantasy XV",
+          date: "06.03.2018",
+          id: 637650,
+          desc: "Ժամանակակից ֆենտեզի ճանապարհորդություն արքայազն Նոկտիսի և իր ընկերների հետ։",
+        },
+        {
+          title: "Final Fantasy VII Remake",
+          date: "10.04.2020",
+          id: 1462040,
+          desc: "Կուլտային ճապոնական RPG-ի ժամանակակից և գեղեցիկ վերաթողարկումը։",
+        },
+        {
+          title: "World of Warcraft",
+          date: "23.11.2004",
+          id: 2124490,
+          desc: "Աշխարհի ամենահայտնի MMORPG-ն Ալյանսի և Հորդայի հավերժական պայքարի մասին։",
+        },
+        {
+          title: "Dragon's Dogma 2",
+          date: "22.03.2024",
+          id: 2054970,
+          desc: "Էպիկական մարտերով հարուստ RPG, որտեղ կարող եք բարձրանալ հսկա հրեշների վրա։",
+        },
+        {
+          title: "Tunic",
+          date: "16.03.2022",
+          id: 553420,
+          desc: "Փոքրիկ աղվեսի արկածները հին գաղտնիքներով լի աշխարհում՝ Զելդայի ոճով։",
+        },
+        {
+          title: "Ori and the Blind Forest",
+          date: "11.03.2015",
+          id: 261570,
+          desc: "Անհավանական գեղեցիկ երաժշտությամբ և գրաֆիկայով հեքիաթային խաղ հոգու մասին։",
+        },
+        {
+          title: "Ori and the Will of the Wisps",
+          date: "11.03.2020",
+          id: 1057090,
+          desc: "Օրիի պատմության էլ ավելի մեծ ու գեղեցիկ շարունակությունը։",
+        },
+        {
+          title: "Terraria",
+          date: "16.05.2011",
+          id: 105600,
+          desc: "2D ֆենտեզի sandbox խաղ, որտեղ կան հարյուրավոր զենքեր և հզոր բոսեր։",
+        },
+        {
+          title: "Genshin Impact",
+          date: "28.09.2020",
+          id: 232140,
+          desc: "Անվճար բաց աշխարհով անիմե-ֆենտեզի խաղ հեթանոսական աստվածների տարածքում։",
+        },
+        {
+          title: "Total War: WARHAMMER III",
+          date: "17.02.2022",
+          id: 1142710,
+          desc: "Մասշտաբային ռազմավարություն (strategy) ֆենտեզի ռազմավարություն դևերի միջև։",
+        },
+        {
+          title: "Shadow of the Colossus",
+          date: "18.10.2005",
+          id: 1053420,
+          desc: "Հուզիչ պատմություն տղայի մասին, ով աղջկան փրկելու համար պետք է հաղթի 16 հսկաների։",
+        },
+        {
+          title: "Fable Anniversary",
+          date: "12.09.2014",
+          id: 288470,
+          desc: "Հեքիաթային խաղ, որտեղ ձեր բարի կամ չար արարքները փոխում են ձեր արտաքինը։",
+        },
+        {
+          title: "Diablo IV",
+          date: "05.06.2023",
+          id: 2344520,
+          desc: "Բլիզարդի մութ ֆենտեզի աշխարհը, որտեղ պետք է պայքարել Լիլիթի դեմ։",
+        },
+        {
+          title: "Diablo III",
+          date: "15.05.2012",
+          id: 105230,
+          desc: "Հանրահայտ action-RPG խաղ հրեշտակների և դևերի հավերժական պատերազմի մասին։",
+        },
+        {
+          title: "Path of Exile",
+          date: "23.10.2013",
+          id: 238960,
+          desc: "Անվճար և չափազանց խորը հնարավորություններով մութ ֆենտեզի RPG։",
+        },
+        {
+          title: "Darkest Dungeon",
+          date: "19.01.2016",
+          id: 262060,
+          desc: "Հոգեբանական ծանր ռազմավարություն քարանձավների մութ սարսափների մասին։",
+        },
+        {
+          title: "Dragon Age: Origins",
+          date: "03.11.2009",
+          id: 17450,
+          desc: "Կլասիկ ֆենտեզի գլուխգործոց Մոխրագույն Պահապանների և արխիդևի պայքարի մասին։",
+        },
+        {
+          title: "Pillars of Eternity",
+          date: "26.03.2015",
+          id: 291650,
+          desc: "Օլդսքուլ ոճի հարուստ տեքստային և տակտիկական ֆենտեզի պատմություն։",
+        },
+        {
+          title: "God of War (2018)",
+          date: "14.01.2022",
+          id: 1593500,
+          desc: "Կրատոսի և նրա որդու արկածները սկանդինավյան դիցաբանության ֆենտեզի աշխարհում։",
+        },
+        {
+          title: "Amalur: Re-Reckoning",
+          date: "08.09.2020",
+          id: 1041720,
+          desc: "Դինամիկ մարտերով հարուստ և գունեղ ֆենտեզի արկածային խաղ։",
+        },
+        {
+          title: "Magicka",
+          date: "25.01.2011",
+          id: 42910,
+          desc: "Հումորային խաղ կախարդների մասին, որտեղ կարող եք խառնել տարրերը նոր կախարդանքների համար։",
+        },
+        {
+          title: "Heroes of Might and Magic III",
+          date: "28.02.1999",
+          id: 297000,
+          desc: "Լեգենդար քայլափոխային ռազմավարությունը, որը սիրված է բոլոր սերունդների կողմից։",
+        },
+        {
+          title: "Trine 4: The Nightmare Prince",
+          date: "08.10.2019",
+          id: 690640,
+          desc: "Գեղեցիկ 2.5D հեքիաթային հանելուկ-խաղ երեք հերոսների մասին։",
+        },
+      ];
+
+      const container = document.getElementById("fantasy-container");
+      fantasyGames.forEach((game) => {
+        container.innerHTML += `
+                <div class="game-card">
+                    <img src="https://steamstatic.com{game.id}/header.jpg" alt="${game.title}" class="game-img">
+                    <div class="game-info">
+                        <div>
+                            <h3 class="game-title">${game.title}</h3>
+                            <div class="game-date">📅 Դուրս է եկել՝ ${game.date}</div>
+                            <p class="game-desc">${game.desc}</p>
+                        </div>
+                        <a href="https://steampowered.com{game.id}/" target="_blank" class="game-link">Դիտել Steam-ում</a>
+                    </div>
+                </div>`;
+      });
+    </script>
+  </body>
+</html>

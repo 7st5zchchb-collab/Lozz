@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+
+    <link rel="stylesheet" href="kjogenq/styles/styles.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="kjogenq/images/8e534619-dec9-48f0-be28-0f3a3f448dde.png"
+    />
+
+    <style>
+      /* ================================
+         ԴԱՇՏԵՐԻ ԸՆԴՀԱՆՈՒՐ ՈՃԸ
+         ================================ */
+
+      .auth-box .custom-input-box {
+        position: relative !important;
+        display: block !important;
+        width: 100% !important;
+        margin-top: 35px !important;
+        margin-bottom: 35px !important;
+        height: 45px !important;
+      }
+
+      /* ================================
+         INPUT-ՆԵՐ
+         ================================ */
+
+      .auth-box .custom-input-box input {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        height: 35px !important;
+
+        padding: 5px !important;
+
+        background: transparent !important;
+
+        border: none !important;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.35) !important;
+
+        outline: none !important;
+
+        color: white !important;
+        font-size: 16px !important;
+
+        box-sizing: border-box !important;
+
+        z-index: 2 !important;
+
+        transition: 0.3s !important;
+      }
+
+      /* ================================
+         LABEL / TEXT
+         ================================ */
+
+      .auth-box .custom-input-box span {
+        position: absolute !important;
+
+        left: 5px !important;
+        bottom: 8px !important;
+
+        color: rgba(255, 255, 255, 0.5) !important;
+        font-size: 16px !important;
+
+        pointer-events: none !important;
+
+        transition: 0.2s ease-out !important;
+
+        z-index: 1 !important;
+      }
+
+      /* ================================
+         LABEL-Ը ԲԱՐՁՐԱՆՈՒՄ Է
+         ================================ */
+
+      .auth-box .custom-input-box input:focus + span,
+      .auth-box .custom-input-box input:not(:placeholder-shown) + span {
+        bottom: 38px !important;
+        left: 0 !important;
+
+        font-size: 12px !important;
+
+        color: #00ffff !important;
+      }
+
+      /* ================================
+         FOCUS-Ի ԺԱՄԱՆԱԿ ԳԻԾԸ
+         ================================ */
+
+      .auth-box .custom-input-box input:focus {
+        border-bottom-color: #00ffff !important;
+      }
+
+      /* ================================
+         BUTTON-ՆԵՐ
+         ================================ */
+
+      .auth-buttons {
+        margin-top: 40px !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+
+        gap: 15px !important;
+      }
+    </style>
+  </head>
+
+  <body class="auth-page">
+    <div class="auth-box">
+      <h2>Register</h2>
+
+      <!-- ================================
+           LOGIN OR GMAIL
+           ================================ -->
+
+      <div class="custom-input-box">
+        <input type="text" id="userIdentity" placeholder=" " />
+
+        <span>Login or Gmail</span>
+      </div>
+
+      <!-- ================================
+           PASSWORD
+           ================================ -->
+
+      <div class="custom-input-box">
+        <input type="password" id="password" placeholder=" " />
+
+        <span>Password</span>
+      </div>
+
+      <!-- ================================
+           CONFIRM PASSWORD
+           ================================ -->
+
+      <div class="custom-input-box">
+        <input type="password" id="confirmPassword" placeholder=" " />
+
+        <span>Confirm Password</span>
+      </div>
+
+      <!-- ================================
+           BUTTONS
+           ================================ -->
+
+      <div class="auth-buttons">
+        <button class="register-btn" id="registerBtn">Sign Up</button>
+
+        <button
+          class="back-btn"
+          onclick="window.location.href = 'account.html'"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================
+         JAVASCRIPT
+         ================================ -->
+
+    <script>
+      document
+        .getElementById("registerBtn")
+        .addEventListener("click", async function () {
+          const identity = document.getElementById("userIdentity").value.trim();
+
+          const pass = document.getElementById("password").value;
+
+          const confirmPass = document.getElementById("confirmPassword").value;
+
+          /* Բոլոր դաշտերը լրացված են՞ */
+
+          if (identity === "" || pass === "" || confirmPass === "") {
+            alert("Խնդրում ենք լրացնել բոլոր դաշտերը։");
+            return;
+          }
+
+          /* Գաղտնաբառերը համընկնո՞ւմ են */
+
+          if (pass !== confirmPass) {
+            alert("Գաղտնաբառերը չեն համընկնում։");
+            return;
+          }
+
+          /* Ուղարկում ենք տվյալները սերվերին */
+
+          try {
+            const response = await fetch("/api/register", {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                username: identity,
+                password: pass,
+              }),
+            });
+
+            const data = await response.json();
+
+            /* Հաջող գրանցում */
+
+            if (response.ok) {
+              alert(data.message);
+
+              window.location.href = "account.html";
+            } else {
+              alert(data.error);
+            }
+          } catch (error) {
+            alert("Սերվերի սխալ: Համոզվեք, որ Node.js սերվերը միացված է:");
+          }
+        });
+
+      /* ================================
+         ENTER ՍԵՂՄԵԼՈՒ ԴԵՊՔՈՒՄ SIGN UP
+         ================================ */
+
+      document.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+
+          document.getElementById("registerBtn").click();
+        }
+      });
+    </script>
+  </body>
+</html>
